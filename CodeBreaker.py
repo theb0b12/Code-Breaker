@@ -52,8 +52,7 @@ def compareNumbers(user, rand, max_digits):
 
 #prints keypad instructions
 def printKeypad(digits):
-    print("123456789")
-    print("Please enter a " + str(digits) + " digit number consisting of the above numbers: ")
+    print("Please enter a " + str(digits) + " digit number with no duplicate values: ")
 
 #gets the range for randomizing a code
 def getMinMax(digits):
@@ -77,7 +76,7 @@ def playGame(rounds, digits, max_digits):
     while(True):
         range_min, range_max = getMinMax(digits)
         selected_number = rd.randint(range_min, range_max)
-        print("Selected number: " + str(selected_number))
+        #print("Selected number: " + str(selected_number))
         if checkDuplicateValues(str(selected_number)):
             break
     
@@ -120,8 +119,8 @@ def printInstructions(digits, rounds):
 
 def run():
     flag = False
-    rounds = 10 #TODO: set to param entered
-    max_digits = 4
+    rounds = 5 #TODO: set to param entered
+    max_digits = 3
     printInstructions(max_digits, rounds)
     digits = max_digits - 1     #decrement max_digits to get correct selected number 
     print("Enter any key to continue")
