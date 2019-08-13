@@ -2,12 +2,13 @@
 """
 @author: Zachary Moore
 @description: This program imitates the minigame Adventure Decoder in Maplestory in a console. 
-The minigame is having the user think logically in order to guess a specific 
-number combination within a certain number of rounds.
+The minigame requires the user to think logically in order to guess a specific 
+number combination within a certain number of rounds/attempts.
 
 TODO: 
-    implement timer for each round, 
-    number of correct digits and numbers
+    implement timer for each round,
+    get params from command line for maximum number of digits and number of attempts available per game,
+    ask user if they want to input number all as one or one by one
 """
 #import sys      #for getting params from command line
 import random as rd
@@ -24,20 +25,30 @@ def checkDuplicateValues(num):
     return len(set(lst)) == len(lst)
 
 #compares the number the user entered and the random number
-def compareNumbers(user, rand):
-    index = 0
-    digit_places = 0
-    values_in_number = 0
-    print(user, rand)
-    while index < len(rand):
-        if user[index] == rand[index]:
-            digit_places += 1
-        index += 1
-           
-    if index == len(rand):
-        return True
-    else:
-        return False
+def compareNumbers(user, rand, max_digits):
+    count_x = 0
+    count_t = 0
+    count_o = 0
+    user_lst = [c for c in user]
+    
+    #print(user, rand)
+    
+    for i in range(len(user_lst)):
+        if user_lst[i] not in rand:
+            count_x += 1
+        else:
+            match = False
+            for j in range(len(rand)):
+                if user_lst[i] == rand[j]:
+                    match = True
+                    break
+            if match:
+                count_o += 1
+            else:
+                count_t += 1
+    
+    #return whether the number was found and list of the counts (as strings)
+    return max_digits == count_o, [str(count_x), str(count_t), str(count_o)]
 
 #prints keypad instructions
 def printKeypad(digits):
@@ -58,38 +69,43 @@ def getMinMax(digits):
     
 def playGame(rounds, digits, max_digits):
     roundnum = 1
-    history = list()#dict()
+    history = list()    #list of dictionaries (since dictionaries can't hold duplicate keys)
+    entry = dict()      #key is the attempted combination and value is result list
+    
+    #get range for random int
+    selected_number = 0
+    while(True):
+        range_min, range_max = getMinMax(digits)
+        selected_number = rd.randint(range_min, range_max)
+        print("Selected number: " + str(selected_number))
+        if checkDuplicateValues(str(selected_number)):
+            break
+    
     while roundnum < (rounds + 1):
         #print history
         #timer = 0
         print("Guess History:")
-        for s in history:
-            print(s)
+        for entry in history:
+            for key in entry:
+                print(key + "- X:" + entry[key][0] + " | T:" + entry[key][1] + " | O:" + entry[key][2])
         
-        #get range for random int
-        selected_number = 0
-        while(True):
-            range_min, range_max = getMinMax(digits)
-            selected_number = rd.randint(range_min, range_max)
-            print("Selected number: " + str(selected_number))
-            if checkDuplicateValues(selected_number):
-                break
-        #print keypad
-        #printKeypad(digits)
-        #get user input
+        
+        #print keypad and get user input
         while(True):
             printKeypad(max_digits)
             user_choice = input()
             if len(user_choice) == max_digits and user_choice.isdigit() and checkDuplicateValues(user_choice):
                 break
+            print("Incorrect input. Please try again")
         #compare numbers to determine accuracy
-        result = compareNumbers(user_choice, str(selected_number))
-        if result:
+        number_found, result = compareNumbers(user_choice, str(selected_number), max_digits)
+        if number_found:
             print("Congrats! You guessed the right number!")
             return
         else:
             print("Wrong Number! Try Again!")
-            history.append(user_choice)
+            entry[user_choice] = result
+            history.append(entry)
         
         #increment round number
         roundnum += 1
@@ -107,7 +123,8 @@ def run():
     rounds = 10 #TODO: set to param entered
     max_digits = 4
     printInstructions(max_digits, rounds)
-    digits = max_digits - 1     #decrement digits to get correct selected number
+    digits = max_digits - 1     #decrement max_digits to get correct selected number 
+    print("Enter any key to continue")
     garbage = input()
     while (True):
         if flag:
