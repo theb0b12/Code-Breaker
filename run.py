@@ -24,8 +24,8 @@ def compareNumbers(user, rand, max_digits):
                         count_t += 1
     return max_digits == count_o, [str(count_x), str(count_t), str(count_o)]
 def printKeypad(digits):
-    print("Please enter a " + str(digets) + "digit number avec non duplicate values")
-def getMinMax(digets):
+    print("Please enter a " + str(digits) + "digit number avec non duplicate values")
+def getMinMax(digits):
 
 
 
