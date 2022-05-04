@@ -26,3 +26,10 @@ def compareNumbers(user, rand, max_digits):
 def printKeypad(digits):
     print("Please enter a " + str(digets) + "digit number avec non duplicate values")
 def getMinMax(digets):
+
+
+
+
+
+    if __name__ == '__main__':
+    run()
