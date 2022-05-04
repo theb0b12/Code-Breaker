@@ -1,15 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-@author: Zachary Moore
-@description: This program imitates the minigame Adventure Decoder in Maplestory in a console. 
-The minigame requires the user to think logically in order to guess a specific 
-number combination within a certain number of rounds/attempts.
-
-TODO: 
-    implement timer for each round,
-    get params from command line for maximum number of digits and number of attempts available per game,
-    ask user if they want to input number all as one or one by one
-"""
 #import sys      #for getting params from command line
 import random as rd
 
