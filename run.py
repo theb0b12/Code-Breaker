@@ -33,3 +33,5 @@ def getMinMax(digits):
 
     if __name__ == '__main__':
     run()
+    def  main()
+        mode = 1
