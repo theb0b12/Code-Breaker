@@ -36,7 +36,7 @@
  30.         decryptedText = readFromFileAndDecrypt(filename, privKeyFilename)
  31.
  32.         print('Decrypted text:')
- 33.         print(decryptedText)
+ 33.         print(decryptedText)8
  34.
  35.
  36. def getBlocksFromText(message, blockSize):
