@@ -18,7 +18,7 @@ def compareNumbers(user, rand, max_digits):
                     if user_lst[i] == rand[j]:
                         match = True
                         break
-                    if match:
+                    if match:   
                         count_o += 1
                     else
                         count_t += 1
@@ -26,11 +26,6 @@ def compareNumbers(user, rand, max_digits):
 def printKeypad(digits):
     print("Please enter a " + str(digits) + "digit number avec non duplicate values")
 def getMinMax(digits):
-
-
-
-
-
     if __name__ == '__main__':
     run()
     def  main()

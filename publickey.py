@@ -7,8 +7,7 @@
   7. # the makePublicPrivateKeys.py program.
   8. # This program must be run in the same folder as the key files.
   9.
- 10. SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz12345
-       67890 !?.'
+ 10. SYMBOLS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890 !?.'
  11.
  12. def main():
  13.     # Runs a test that encrypts a message to a file or decrypts a message
@@ -22,7 +21,7 @@
                The Founding Fathers gave the free press the protection it must
                have to bare the secrets of government and inform the people.
                Hugo Black.'
- 20.         pubKeyFilename = 'al_sweigart_pubkey.txt'
+ 20.         pubKeyFilename = 'key_pubkey.txt'
  21.         print('Encrypting and writing to %s...' % (filename))
  22.         encryptedText = encryptAndWriteToFile(filename, pubKeyFilename,
                message)
@@ -31,7 +30,7 @@
  25.         print(encryptedText)
  26.
  27.     elif mode == 'decrypt':
- 28.         privKeyFilename = 'al_sweigart_privkey.txt'
+ 28.         privKeyFilename = 'key_privkey.txt'
  29.         print('Reading from %s and decrypting...' % (filename))
  30.         decryptedText = readFromFileAndDecrypt(filename, privKeyFilename)
  31.
